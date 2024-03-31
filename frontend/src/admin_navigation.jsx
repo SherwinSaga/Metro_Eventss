@@ -8,12 +8,11 @@ function Adminnavigation() {
     return (
         <div>
             <div className='topnav'>
-                <a><Link to="/adminhomepage">Home</Link></a>
-                <a><Link to="/admin_requests">Requests</Link></a>
-                <a><Link to="/admin_events">List of Events</Link></a>
-                <a><Link to="/admin_organizer">List of Organizers</Link></a>
-                <a class="logout"><Link to="/adminlogin" onClick={bootleg_logout}>Log Out</Link></a>
-                {/* to add*/}
+                <Link className="topnav-link" to="/adminhomepage">Home</Link>
+                <Link className="topnav-link" to="/admin_requests">Requests</Link>
+                <Link className="topnav-link" to="/admin_events">List of Events</Link>
+                <Link className="topnav-link" to="/admin_organizer">List of Organizers</Link>
+                <Link className="topnav-link logout" to="/adminlogin" onClick={bootleg_logout}>Log Out</Link>
             </div>
         </div>
     );

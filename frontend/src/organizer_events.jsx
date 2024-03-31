@@ -1,10 +1,16 @@
 import React from 'react';
+import NavigationBar from './navigationBar';
+import OrganizerNavBar from "./navigationBarOrganize";
 import './App.css'; 
 
 function organizer_events() {
     return (
-        <div className="organizer_events">
-            <h1>Events</h1>
+        <div>
+            <NavigationBar />
+            <OrganizerNavBar />
+            <div className="organizer_events">
+                <h1>EVENTS</h1>
+            </div>
         </div>
     );
 }

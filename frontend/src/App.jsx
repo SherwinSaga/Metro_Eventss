@@ -10,6 +10,9 @@ import AdminHomepage from './admin_homepage';
 import Admin_requests from './admin_requests';
 import Admin_events from './admin_events';
 import Admin_organizers from './admin_organizers';
+import Organizer_create from './organizer_create';
+import Organizer_edit from './organizer_edit';
+import Organizer_events from './organizer_events';
 
 function App(){
   
@@ -39,11 +42,18 @@ function App(){
     <Router>
       <div className="App">
         <Routes>
+
+          {/*user routes */}
           <Route path="/" element={<Login />} /> 
           <Route path="/register" element={<Register />} /> 
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/myevents" element={<MyEvents/>} />
           <Route path="/organize" element={<Organize/>} />
+
+          {/*organizer routes */}
+          <Route path="/organizer_create" element={<Organizer_create/>} />
+          <Route path="/organizer_edit" element={<Organizer_edit/>} />
+          <Route path="/organizer_events" element={<Organizer_events/>} />
 
           {/*admin routes */}
           <Route path="/adminlogin" element={<AdminLogin/>} />
