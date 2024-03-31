@@ -12,6 +12,7 @@ function navigationBar() {
                 <a ><Link to="/myevents">My Events</Link></a>
                 <a><Link to="/organize">Organize</Link></a>
                 <a class="logout"><Link to="/" onClick={bootleg_logout}>Log Out</Link></a>
+                {/* to add*/}
             </div>
         </div>
     );
