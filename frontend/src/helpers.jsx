@@ -29,7 +29,6 @@ export function getSessionUserID(){
 
 export function isUserOrganizer(){
 
-    
     const userData = localStorage.getItem('user');
     if(userData){
         const user = JSON.parse(userData);
@@ -41,6 +40,30 @@ export function isUserOrganizer(){
     return null;
 }
 
+export function getUserFirstname(){
+
+    const userData = localStorage.getItem('user');
+    if(userData){
+        const user = JSON.parse(userData);
+        if(user){
+            return user.User_firstname;
+        }
+
+    }
+    return null;
+}
+
+export function getUserLastname(){
+    const userData = localStorage.getItem('user');
+    if(userData){
+        const user = JSON.parse(userData);
+        if(user){
+            return user.User_lastname;
+        }
+
+    }
+    return null;
+}
 export function bootleg_logout(){
     localStorage.clear();
 }

@@ -1,14 +1,22 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { bootleg_logout } from './helpers';
+import { isUserOrganizer } from './helpers';
 import './App.css'; 
 
 function NavigationBar() {
     const navigate = useNavigate();
+    const isOrganizer = isUserOrganizer();
 
+
+    //to do
+    //fix navigate
+    //maka sulod ang dili organizer ing ani style
     const handleOrganizeClick = (event) => {
-        event.preventDefault();
-        navigate('/organizer_create');
+        if(isOrganizer){
+            event.preventDefault();
+            navigate('/organizer_create');
+        }
     }
 
     return (
