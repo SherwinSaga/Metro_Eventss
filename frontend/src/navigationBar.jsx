@@ -3,19 +3,17 @@ import { Link } from 'react-router-dom';
 import { bootleg_logout } from './helpers';
 import './App.css'; 
 
-
-function navigationBar() {
+function NavigationBar() {
     return (
         <div>
             <div className='topnav'>
-                <a class="active" ><Link to="/homepage">Home</Link></a>
-                <a ><Link to="/myevents">My Events</Link></a>
-                <a><Link to="/organize">Organize</Link></a>
-                <a class="logout"><Link to="/" onClick={bootleg_logout}>Log Out</Link></a>
-                {/* to add*/}
+                <Link className="topnav-link" to="/homepage">Home</Link>
+                <Link className="topnav-link" to="/myevents">My Events</Link>
+                <Link className="topnav-link" to="/organize">Organize</Link>
+                <Link className="topnav-link logout" to="/" onClick={bootleg_logout}>Log Out</Link>
             </div>
         </div>
     );
 }
 
-export default navigationBar;
+export default NavigationBar;

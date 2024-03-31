@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './App.css'; 
 
@@ -6,12 +7,13 @@ function organizerNavBar() {
     return (
         <div>
             <div className="sidenav">
-                <a href="#" class="w3-bar-item w3-button">Create Event</a>
-                <a href="#" class="w3-bar-item w3-button">Edit Event</a>
-                <a href="#" class="w3-bar-item w3-button">Events you Created</a>
+                <Link className="sidenav-link" to="/">Create Event</Link>
+                <Link className="sidenav-link" to="/">Edit Event</Link>
+                <Link className="sidenav-link" to="/">Events you Created</Link>
             </div>
         </div>
     );
 }
+
 
 export default organizerNavBar;
