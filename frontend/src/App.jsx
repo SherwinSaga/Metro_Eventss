@@ -5,6 +5,7 @@ import Login from './user_login';
 import Register from './user_register';
 import MyEvents from './user_myevents';
 import Organize from './user_organize';
+import Notifications from './user_notifications';
 import AdminLogin from './admin_login';
 import AdminHomepage from './admin_homepage';
 import Admin_requests from './admin_requests';
@@ -49,6 +50,7 @@ function App(){
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/myevents" element={<MyEvents/>} />
           <Route path="/organize" element={<Organize/>} />
+          <Route path="/notifications" element={<Notifications/>} />
 
           {/*organizer routes */}
           <Route path="/organizer_create" element={<Organizer_create/>} />

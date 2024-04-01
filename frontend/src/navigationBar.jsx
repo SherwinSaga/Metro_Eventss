@@ -33,6 +33,7 @@ function NavigationBar() {
                 <Link className="topnav-link" to="/myevents">My Events</Link>
                 <Link className="topnav-link" to="/organize" onClick={handleOrganizeClick}>Organize</Link>
                 <Link className="topnav-link logout" to="/" onClick={bootleg_logout}>Log Out</Link>
+                <Link className="topnav-link logout" to="/notifications" >Notifications</Link>
             </div>
         </div>
     );

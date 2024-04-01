@@ -24,12 +24,7 @@ function Login() {
         })
         .then(response => response.json())
         .then(data => {
-            if(data.message === "1"){ //1 = true
-                console.log(data.user);
-
-                //pass kinsa ang current user sa session
-                //this is a bootleg approach
-                //http cookies much better pero gi tapol ko
+            if(data.message === "1"){ 
                 localStorage.setItem('user', JSON.stringify(data.user)); 
                 navigate('/homepage');
             } else {
