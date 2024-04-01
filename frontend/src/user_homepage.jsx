@@ -3,7 +3,6 @@ import NavigationBar from "./navigationBar";
 import { getSessionUser, getSessionUserID } from "./helpers";
 
 function Homepage(){
-    const currentUser = getSessionUser();
     const currUid = getSessionUserID();
     const [events, setEvents] = useState([]);
     const [participatedEvents, setParticipatedEvents] = useState([]);
@@ -52,13 +51,12 @@ function Homepage(){
             <h2>Events</h2>
             <div className="homepage_display">
                 {nonParticipatedEvents.map(event => (
-                    <div key={event.event_id} style={{border: '1px solid #ccc', padding: '10px'}}>
+                    <div className="homepage_table_display"key={event.event_id}>
                         <h3>{event.event_name}</h3>
                         <p>Organized by: {event.event_organizer}</p>
                         <p>Location: {event.event_location}</p>
                         <p>Date: {new Date(event.event_date).toLocaleDateString()}</p>
                         <p>Time: {new Date(`1970-01-01T${event.event_time}Z`).toLocaleTimeString()}</p>
-                        <p>Year: {event.event_year}</p>
                         <p>Status: {event.event_isDone ? 'Done' : 'Not Done'}</p>
                         <button onClick={() => handleJoin(event.event_id)}>Join</button>
                     </div>

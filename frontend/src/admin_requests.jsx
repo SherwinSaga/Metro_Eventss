@@ -48,7 +48,7 @@ function Admin_requests(){
             <h2>Pending Requests</h2>
             <div className="admin_request_display">
                 {requests.map(request => (
-                    <div key={request.oa_id} style={{border: '1px solid #ccc', padding: '10px'}}>
+                    <div className="admin_table_display"key={request.oa_id}>
                         <h3>{request.oa_username}</h3>
                         <p>User ID: {request.oa_userID}</p>
                         <button onClick={() => handleApprove(request.oa_userID)}>Approve</button>

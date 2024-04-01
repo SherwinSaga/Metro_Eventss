@@ -42,7 +42,7 @@ function Admin_organizers(){
             <h2>All Organizers</h2>
             <div className="admin_organizers">
                 {organizers.map(organizer => (
-                    <div key={organizer.User_id} style={{border: '1px solid #ccc', padding: '10px'}}>
+                    <div className="admin_organizers_display"key={organizer.User_id}>
                         <h3>{organizer.User_username}</h3>
                         <p>First Name: {organizer.User_firstname}</p>
                         <p>Last Name: {organizer.User_lastname}</p>

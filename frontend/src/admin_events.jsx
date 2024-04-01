@@ -40,14 +40,13 @@ function Admin_events(){
             <h2>All Events</h2>
             <div className="admin_events">
                 {events.map(event => (
-                    <div key={event.event_id} style={{border: '1px solid #ccc', padding: '10px'}}>
+                    <div className="admin_events_display"key={event.event_id}>
                         <h3>{event.event_name}</h3>
                         <p>event id: {event.event_id}</p>
                         <p>Organized by: {event.event_organizer}</p>
                         <p>Location: {event.event_location}</p>
                         <p>Date: {new Date(event.event_date).toLocaleDateString()}</p>
                         <p>Time: {new Date(`1970-01-01T${event.event_time}Z`).toLocaleTimeString()}</p>
-                        <p>Year: {event.event_year}</p>
                         <p>Status: {event.event_isDone ? 'Done' : 'Not Done'}</p>
                         <button onClick={() => handleDelete(event.event_id)}>Delete</button>
                     </div>

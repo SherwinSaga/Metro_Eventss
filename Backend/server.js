@@ -35,19 +35,34 @@ app.get('/admin', (req, res)=> {
 })
 
 
-
+//used in navigationBar
 app.get('/isOrganizer', (req, res) => {
-    const userId = req.query.userId; // assuming you're passing userId as a query parameter
+    const userId = req.query.userId; 
     const sql = "SELECT User_isOrganizer FROM user WHERE User_id = ?";
     
     db.query(sql, [userId], (err, data) => {
         if(err) return res.jsonp(err);
         
-        // Assuming User_isOrganizer is a boolean
+        
         const isOrganizer = data[0].User_isOrganizer;
         return res.json({isOrganizer});
     })
 })
+
+//organizer_create
+app.post('/create_events', (req, res) => {
+    const { event_name, event_organizer, event_location, event_date, event_time, event_orgUID } = req.body;
+    const query = 'INSERT INTO events (event_name, event_organizer, event_location, event_date, event_time, event_orgUID) VALUES (?, ?, ?, ?, ?, ?) ';
+    db.query(query, [event_name, event_organizer, event_location, event_date, event_time, event_orgUID], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).json({error: 'Internal server error'});
+        } else {
+            res.status(200).json({message: 'Event created successfully!'});
+        }
+    });
+});
+
 
 
 //user register
@@ -106,6 +121,41 @@ app.get('/events', (req, res) => {
     })
 })
 
+// fetch events created by specific user
+app.get('/events/:event_orgUID', (req, res) => {
+    const { event_orgUID } = req.params;
+    const sql = "SELECT * from events WHERE event_orgUID = ?";
+    db.query(sql, [event_orgUID], (err, data) => {
+        if(err) return res.jsonp(err);
+        return res.json(data);
+    })
+})
+
+//fetch event the organizer want to edit
+app.get('/events/:event_id', (req, res) => {
+    const { event_id } = req.params;
+    const sql = "SELECT * from events WHERE event_id = ?";
+    db.query(sql, [event_id], (err, data) => {
+        if(err) return res.jsonp(err);
+        return res.json(data);
+    })
+})
+
+//organizer_edit
+app.put('/organizer_edit_event/:eventId', (req, res) => {
+    const { eventId } = req.params;
+    const { event_name, event_location, event_date, event_time } = req.body;
+    const sql = "UPDATE events SET event_name = ?, event_location = ?, event_date = ?, event_time = ? WHERE event_id = ?";
+    db.query(sql, [event_name, event_location, event_date, event_time, eventId], (err, data) => {
+        if(err) {
+            console.error('Error in updating event:', err);
+            return res.status(500).jsonp(err);
+        }
+        return res.json({message: "1"});
+    })
+});
+
+
 // admin -nag gamit ani
 app.delete('/events/:eventId', (req, res) => {
     const { eventId } = req.params;
@@ -150,6 +200,20 @@ app.delete('/user_event_participated/:eventId', (req, res) => {
     db.query(sql, [eventId, userId], (err, data) => {
         if(err) {
             console.error('Error deleting record:', err);
+            return res.status(500).jsonp(err);
+        }
+        return res.status(204).end();
+    })
+})
+
+//organizer _edit
+app.delete('/organizer_delete_event/:eventId', (req, res) => {
+    const { eventId } = req.params;
+    const { userId } = req.body;
+    const sql = "DELETE FROM events WHERE event_id = ? AND event_orgUID = ?";
+    db.query(sql, [eventId, userId], (err, data) => {
+        if(err) {
+            console.error('Error in deleting organizer:', err);
             return res.status(500).jsonp(err);
         }
         return res.status(204).end();

@@ -51,13 +51,12 @@ function MyEvents(){
             <h2>My Participating Events</h2>
             <div className="my_events_display">
                 {userEvents.map(event => (
-                    <div key={event.event_id} style={{border: '1px solid #ccc', padding: '10px'}}>
+                    <div className="myevents_table_display"key={event.event_id}>
                         <h3>{event.event_name}</h3>
                         <p>Organized by: {event.event_organizer}</p>
                         <p>Location: {event.event_location}</p>
                         <p>Date: {new Date(event.event_date).toLocaleDateString()}</p>
                         <p>Time: {new Date(`1970-01-01T${event.event_time}Z`).toLocaleTimeString()}</p>
-                        <p>Year: {event.event_year}</p>
                         <p>Status: {event.event_isDone ? 'Done' : 'Not Done'}</p>
                         <button onClick={() => handleLeave(event.event_id)}>Leave</button>
                     </div>
