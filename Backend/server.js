@@ -36,7 +36,18 @@ app.get('/admin', (req, res)=> {
 
 
 
-
+app.get('/isOrganizer', (req, res) => {
+    const userId = req.query.userId; // assuming you're passing userId as a query parameter
+    const sql = "SELECT User_isOrganizer FROM user WHERE User_id = ?";
+    
+    db.query(sql, [userId], (err, data) => {
+        if(err) return res.jsonp(err);
+        
+        // Assuming User_isOrganizer is a boolean
+        const isOrganizer = data[0].User_isOrganizer;
+        return res.json({isOrganizer});
+    })
+})
 
 
 //user register

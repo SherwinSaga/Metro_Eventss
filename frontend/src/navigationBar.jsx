@@ -1,17 +1,24 @@
-import React from 'react';
+import {React, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { bootleg_logout } from './helpers';
-import { isUserOrganizer } from './helpers';
+import { bootleg_logout, getSessionUserID } from './helpers';
 import './App.css'; 
 
 function NavigationBar() {
     const navigate = useNavigate();
-    const isOrganizer = isUserOrganizer();
+    const UID = getSessionUserID();
+    const [isOrganizer, setIsOrganizer] = useState(false);
 
+    useEffect(() => {
+        fetch(`http://localhost:8000/isOrganizer?userId=${UID}`)
+            .then(response => response.json())
+            .then(data => {
+                setIsOrganizer(data.isOrganizer);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }, [UID]);
 
-    //to do
-    //fix navigate
-    //maka sulod ang dili organizer ing ani style
     const handleOrganizeClick = (event) => {
         if(isOrganizer){
             event.preventDefault();

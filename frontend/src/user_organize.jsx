@@ -1,12 +1,10 @@
 import NavigationBar from "./navigationBar";
-import OrganizerNavBar from "./navigationBarOrganize";
-import { getSessionUser, getSessionUserID, isUserOrganizer } from "./helpers";
+import { getSessionUser, getSessionUserID } from "./helpers";
 
 function organize(){
 
     const currentUser = getSessionUser();    
     const currentUid = getSessionUserID();
-    const isOrganizer = isUserOrganizer();
 
     const applyToBeOrganizer = () => {
         fetch('http://localhost:8000/apply_organizer', {
@@ -26,28 +24,11 @@ function organize(){
         });
     };
 
-    let content;
-
-    if (isOrganizer === 0) {
-        content = (
-            <div className="B_org">
-                <NavigationBar />
-                <button onClick={applyToBeOrganizer}>Become an Organizer!</button>
-            </div>
-        );
-    } else {
-        content = (
-            <div>
-                <NavigationBar />
-                <OrganizerNavBar />
-            </div>
-        );
-    }
-
-
+    
     return(
-        <div className="organize_container">
-            {content}
+        <div className="B_org">
+            <NavigationBar />
+            <button onClick={applyToBeOrganizer}>Become an Organizer!</button>
         </div>
     );
 }
