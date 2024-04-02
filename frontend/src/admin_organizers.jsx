@@ -28,12 +28,33 @@ function Admin_organizers(){
             return response.text().then(text => text ? JSON.parse(text) : {})
         })
         .then(() => {
-            window.location.reload();
+            // Create a notification after revoking the status
+            fetch(`http://localhost:8000/create_notify`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userid: userId,
+                    notif_type: "Organizer Permissions: Revoked",
+                }),
+            })
+            .then(response => {
+                if (!response.ok) { throw response }
+                return response.text().then(text => text ? JSON.parse(text) : {})
+            })
+            .then(() => {
+                window.location.reload();
+            })
+            .catch(err => {
+                console.error('Error creating notification:', err);
+            });
         })
         .catch(err => {
             console.error('Error revoking organizer status:', err);
         });
     };
+    
     
 
     return(

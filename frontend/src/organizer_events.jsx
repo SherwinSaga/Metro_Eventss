@@ -18,32 +18,54 @@ function OrganizerEvents() {
     }, []);
 
     const handleEdit = (eventId) => {
-        // Handle event edit here
         navigate('/organizer_edit', { state: { eventId } });
     };
 
     const handleDelete = (eventId) => {
-        fetch(`http://localhost:8000/organizer_delete_event/${eventId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userId: getSessionUserID(),
-            }),
-        })
-        .then(response => {
-            if (response.status === 204) {
-                // Remove the deleted event from the state
-                setEvents(events.filter(event => event.event_id !== eventId));
-                alert('Event deleted successfully!');
-            } else {
-                console.error('Failed to delete event.');
-                alert('Failed to delete event.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
+        fetch(`http://localhost:8000/user_event_participated_query/${eventId}`)
+            .then(response => response.json())
+            .then(data => {
+                // Send notification to each user
+                data.forEach(user => {
+                    fetch('http://localhost:8000/create_notify', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            userid: user.uep_userID,
+                            notif_type: 'An Event you were participating was Deleted',
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch((error) => console.error('Error:', error));
+                });
+    
+                fetch(`http://localhost:8000/organizer_delete_event/${eventId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: getSessionUserID(),
+                    }),
+                })
+                .then(response => {
+                    if (response.status === 204) {
+                        setEvents(events.filter(event => event.event_id !== eventId));
+                        alert('Event deleted successfully!');
+                        window.location.reload();
+                    } else {
+                        console.error('Failed to delete event.');
+                        alert('Failed to delete event.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            })
+            .catch((error) => console.error('Error:', error));
     };
+    
     
 
     return (

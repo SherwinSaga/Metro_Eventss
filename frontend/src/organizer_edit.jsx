@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationBar from './navigationBar';
 import OrganizerNavBar from "./navigationBarOrganize";
 import './App.css'; 
 
 function OrganizerEdit() {
+    const navigate = useNavigate();
     const location = useLocation();
     const eventId = location.state.eventId;
     const [event, setEvent] = useState({
@@ -15,13 +16,10 @@ function OrganizerEdit() {
     });
 
     useEffect(() => {
-        console.log(eventId);
         fetch(`http://localhost:8000/events/${eventId}`)
             .then(res => res.json())
             .then(data => setEvent(data))
             .catch(error => console.error('Error:', error));
-
-            console.log(event);
     }, []);
 
     const handleChange = (e) => {
@@ -41,13 +39,47 @@ function OrganizerEdit() {
         .then(response => {
             if (response.message === "1") {
                 alert('Event updated successfully!');
+
+                fetch(`http://localhost:8000/user_event_participated_query/${eventId}`)
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(user => {
+                        const userId = user.uep_userID; 
+                        //to do
+                        //add notif type
+                        fetch('http://localhost:8000/create_notify', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ 
+                                userid: userId,
+                                notif_type: "An Event you were participating was updated",
+                            }), 
+                        })
+                        .then(res => res.json())
+                        .then(response => {
+                            if (response.message === "notified") {
+                                console.log(`Notification created for user ${userId}`);
+                            } else {
+                                console.error('Failed to create notification.');
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+                
             } else {
                 alert('Failed to update event.');
             }
         })
         .catch(error => console.error('Error:', error));
+    
+        navigate('/organizer_events');
     }
-
+    
+    
     return (
         <div>
             <NavigationBar />

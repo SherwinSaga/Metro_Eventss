@@ -35,6 +35,61 @@ app.get('/admin', (req, res)=> {
 })
 
 
+//notification
+app.post('/create_notify', (req, res) => {
+    const { userid, notif_type } = req.body;
+    const sql = "INSERT INTO notifications (notification_userID, notification_type) VALUES (? , ?)";
+
+    db.query(sql, [userid, notif_type], (err, result) => {
+        if(err) {
+            console.error(err);
+            return res.jsonp(err);
+        }
+        return res.json({message: "notified"});
+    })
+})
+
+//used with notif in organizer_edit and organizer_event
+app.get('/user_event_participated_query/:eventid', (req, res) => {
+    const { eventid } = req.params;
+    const sql = "SELECT uep_userID from user_event_participated WHERE uep_eventID = ?";
+    db.query(sql, [eventid], (err, data) => {
+        if(err) return res.jsonp(err);
+        return res.json(data);
+    })
+})
+
+
+//user_notifications.jsx
+app.get('/notifications_query_unread/:userid', (req, res) => {
+    const { userid } = req.params;
+    const sql = "SELECT * FROM notifications WHERE notification_userID = ? AND notification_isMarkedRead = 0";
+    db.query(sql, [userid], (err, data) => {
+        if(err) return res.jsonp(err);
+        return res.json(data);
+    })
+})
+
+app.get('/notifications_query_read/:userid', (req, res) => {
+    const { userid } = req.params;
+    const sql = "SELECT * FROM notifications WHERE notification_userID = ? AND notification_isMarkedRead = 1";
+    db.query(sql, [userid], (err, data) => {
+        if(err) return res.jsonp(err);
+        return res.json(data);
+    })
+})
+
+app.post('/mark_as_read/:notificationid', (req, res) => {
+    const { notificationid } = req.params;
+    const sql = "UPDATE notifications SET notification_isMarkedRead = 1 WHERE notification_id = ?";
+    db.query(sql, [notificationid], (err, data) => {
+        if(err) return res.jsonp(err);
+        return res.json({ message: 'Notification marked as read' });
+    })
+})
+
+
+
 //used in navigationBar
 app.get('/isOrganizer', (req, res) => {
     const userId = req.query.userId; 
@@ -141,6 +196,8 @@ app.get('/events/:event_id', (req, res) => {
     })
 })
 
+
+
 //organizer_edit
 app.put('/organizer_edit_event/:eventId', (req, res) => {
     const { eventId } = req.params;
@@ -191,6 +248,7 @@ app.post('/user_event_participated', (req, res) => {
         return res.json({message: "add sucess"});
     })
 })
+
 
 //my events delete button
 app.delete('/user_event_participated/:eventId', (req, res) => {
@@ -301,6 +359,21 @@ app.post('/approve', (req, res) => {
 });
 
 
+
+
+// admin side admin_requests
+app.delete('/deny_request/:userid', (req, res) => {
+    const { userid } = req.params;
+    
+    const sql = "DELETE FROM organizer_app WHERE oa_userID = ?";
+    db.query(sql, [userid], (err, data) =>{
+        if(err){
+            console.error('Error denying request: ', err);
+            return res.status(500).jsonp(err);
+        }
+        return res.json({message: "Request Denied"});
+    })
+})
 
 // admin side  admin_organizers functions
 app.get('/get_organizers', (req, res) => {

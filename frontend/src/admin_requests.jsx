@@ -26,21 +26,55 @@ function Admin_requests(){
         .then(response => response.json())
         .then(data => {
             alert(data.message);
+            // Send notification
+            fetch('http://localhost:8000/create_notify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userid: userId,
+                    notif_type: "Organizer request: APPROVED",
+                }),
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => console.error('Error:', error));
             window.location.reload();
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     };
-
     
     const handleDeny = (userId) => {
-        // to do
-        // if deny is clicked
-        // make an insert into the notifications table
-        
-        alert("haha hotdog");
+        fetch(`http://localhost:8000/deny_request/${userId}`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            // Send notification
+            fetch('http://localhost:8000/create_notify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userid: userId,
+                    notif_type: "Organizer request: REVOKED",
+                }),
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => console.error('Error:', error));
+            window.location.reload();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     };
+    
 
     return(
         <div>
