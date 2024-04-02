@@ -58,16 +58,16 @@ function Admin_organizers(){
     
 
     return(
-        <div>
+        <div id="adminOrg">
             <Admin_navigation />
-            <h2>All Organizers</h2>
+            <h2 id="adminorgHeader">All Organizers</h2>
             <div className="admin_organizers">
                 {organizers.map(organizer => (
                     <div className="admin_organizers_display"key={organizer.User_id}>
                         <h3>{organizer.User_username}</h3>
                         <p>First Name: {organizer.User_firstname}</p>
                         <p>Last Name: {organizer.User_lastname}</p>
-                        <button onClick={() => handleRevoke(organizer.User_id)}>Revoke Organizer Status</button>
+                        <button onClick={() => handleRevoke(organizer.User_id)} id="btnRevoke">Revoke Organizer Status</button>
                     </div>
                 ))}
             </div>

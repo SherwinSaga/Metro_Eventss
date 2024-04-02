@@ -36,40 +36,45 @@ function Register() {
 
     return (
         <div className="register-container">
+            <h6 id="registerHeader">REGISTER</h6>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
+                <label id="usernameReg">
+                    USERNAME:
                     <input
                         type="text"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
+                        placeholder="Enter Username"
                     />
                 </label>
-                <label>
-                    First Name:
+                <label label id="firstName">
+                    FIRST NAME:
                     <input
                         type="text"
                         value={firstname}
                         onChange={e => setFirstname(e.target.value)}
+                        placeholder="Enter Firstname"
                     />
                 </label>
-                <label>
-                    Last Name:
+                <label id="secondName">
+                    LAST NAME:
                     <input
                         type="text"
                         value={lastname}
                         onChange={e => setLastname(e.target.value)}
+                        placeholder="Enter Lastname"
                     />
                 </label>
-                <label>
-                    Password:
+                <label id="passwordReg">
+                    PASSWORD:
                     <input
                         type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
+                        placeholder="Enter password"
                     />
                 </label>
-                <input type="submit" value="Register" />
+                <input type="submit" value="REGISTER" id="btnsubmitReg"/>
             </form>
         </div>
     );

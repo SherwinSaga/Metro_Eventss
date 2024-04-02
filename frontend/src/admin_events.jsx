@@ -35,9 +35,9 @@ function Admin_events(){
     };
 
     return(
-        <div>
+        <div id="adminEvents">
             <Admin_navigation />
-            <h2>All Events</h2>
+            <h2 id="admineventHeader">All Events</h2>
             <div className="admin_events">
                 {events.map(event => (
                     <div className="admin_events_display"key={event.event_id}>
@@ -48,7 +48,7 @@ function Admin_events(){
                         <p>Date: {new Date(event.event_date).toLocaleDateString()}</p>
                         <p>Time: {new Date(`1970-01-01T${event.event_time}Z`).toLocaleTimeString()}</p>
                         <p>Status: {event.event_isDone ? 'Done' : 'Not Done'}</p>
-                        <button onClick={() => handleDelete(event.event_id)}>Delete</button>
+                        <button onClick={() => handleDelete(event.event_id)} id="btnDel">Delete</button>
                     </div>
                 ))}
             </div>

@@ -46,19 +46,19 @@ function Homepage(){
     };
 
     return(
-        <div>
+        <div id="homePage">
             <NavigationBar />
-            <h2>Events</h2>
+            <h2 id='headerEvent'>EVENTS</h2>
             <div className="homepage_display">
                 {nonParticipatedEvents.map(event => (
                     <div className="homepage_table_display"key={event.event_id}>
-                        <h3>{event.event_name}</h3>
-                        <p>Organized by: {event.event_organizer}</p>
-                        <p>Location: {event.event_location}</p>
-                        <p>Date: {new Date(event.event_date).toLocaleDateString()}</p>
-                        <p>Time: {new Date(`1970-01-01T${event.event_time}Z`).toLocaleTimeString()}</p>
-                        <p>Status: {event.event_isDone ? 'Done' : 'Not Done'}</p>
-                        <button onClick={() => handleJoin(event.event_id)}>Join</button>
+                        <h3 id='eventName'>{event.event_name}</h3>
+                        <p className="mgaP" id='org'>Organized by: {event.event_organizer}</p>
+                        <p className="mgaP" id='loc'>Location: {event.event_location}</p>
+                        <p className="mgaP" id='date'>Date: {new Date(event.event_date).toLocaleDateString()}</p>
+                        <p className="mgaP" id='taym'>Time: {new Date(`1970-01-01T${event.event_time}Z`).toLocaleTimeString()}</p>
+                        <p className="mgaP" id='stat'>Status: {event.event_isDone ? 'Done' : 'Not Done'}</p>
+                        <button onClick={() => handleJoin(event.event_id)} id="btnJoin">JOIN</button>
                     </div>
                 ))}
             </div>

@@ -69,11 +69,11 @@ function OrganizerEvents() {
     
 
     return (
-        <div>
+        <div id="orgeventsPage">
             <NavigationBar />
             <OrganizerNavBar />
+            <h1 id="orgeventsHeader">EVENTS</h1>
             <div className="organizer_events">
-                <h1>EVENTS</h1>
                     {events.map(event => (
                         <div className="org_event_display"key={event.event_id}>
                             <h3>{event.event_name}</h3>
@@ -81,8 +81,8 @@ function OrganizerEvents() {
                             <p>Location: {event.event_location}</p>
                             <p>Date: {new Date(event.event_date).toLocaleDateString()}</p>
                             <p>Time: {new Date(`1970-01-01T${event.event_time}Z`).toLocaleTimeString()}</p>
-                            <button onClick={() => handleEdit(event.event_id)}>Edit</button>
-                            <button onClick={() => handleDelete(event.event_id)}>Delete</button>
+                            <button onClick={() => handleEdit(event.event_id)} id="btnEdit">Edit</button>
+                            <button onClick={() => handleDelete(event.event_id)} id="btnDelete">Delete</button>
                         </div>
                     ))}
             </div>

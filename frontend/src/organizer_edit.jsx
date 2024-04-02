@@ -81,18 +81,18 @@ function OrganizerEdit() {
     
     
     return (
-        <div>
+        <div id="editorgPage">
             <NavigationBar />
             <OrganizerNavBar />
             <div className="organizer_edit">
-                <h1>EDIT</h1>
+                <h1 id="headerEdit">EDIT</h1>
                 {event && (
                     <form onSubmit={handleSubmit}>
-                        <input type="text" name="event_name" value={event.event_name} onChange={handleChange} />
-                        <input type="text" name="event_location" value={event.event_location} onChange={handleChange} />
+                        <input type="text" name="event_name" value={event.event_name} onChange={handleChange} placeholder="Event Name" required/>
+                        <input type="text" name="event_location" value={event.event_location} onChange={handleChange} placeholder="Event Location" required/>
                         <input type="date" name="event_date" value={event.event_date} onChange={handleChange} />
                         <input type="time" name="event_time" value={event.event_time} onChange={handleChange} />
-                        <button type="submit">Save Changes</button>
+                        <button type="submit">SAVE CHANGES</button>
                     </form>
                 )}
             </div>

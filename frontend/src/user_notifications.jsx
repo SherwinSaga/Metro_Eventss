@@ -36,18 +36,18 @@ function UserNotifications() {
     };
 
     return (
-        <div>
+        <div id="userNotif">
             <NavigationBar />
-            <h2>New Notifications</h2>
+            <h2 id="newnotifHeader">New Notifications</h2>
             <div className="my_notifications_display">
                 {unreadNotifications.map(notification => (
                     <div className="mynotifications_table_display" key={notification.notification_id}>
                         <h3>Type: {notification.notification_type}</h3>
-                        <button onClick={() => handleMarkAsRead(notification.notification_id)}>Mark as Read</button>
+                        <button onClick={() => handleMarkAsRead(notification.notification_id)} id="btnMark">Mark as Read</button>
                     </div>
                 ))}
             </div>
-            <h2>Old Notifications</h2>
+            <h2 id="oldnotifHeader">Old Notifications</h2>
             <div className="my_notifications_display">
                 {readNotifications.map(notification => (
                     <div className="mynotifications_table_display" key={notification.notification_id}>

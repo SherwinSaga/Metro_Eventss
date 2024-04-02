@@ -9,7 +9,7 @@ function organizerNavBar() {
         <div>
             <div className="sidenav">
                 <Link className="sidenav-link" to="/organizer_create">Create Event</Link>
-                <Link className="sidenav-link" to="/organizer_events">Events you Created</Link>
+                <Link className="sidenav-link" to="/organizer_events">Your Events</Link>
             </div>
         </div>
     );

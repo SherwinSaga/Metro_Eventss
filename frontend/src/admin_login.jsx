@@ -46,27 +46,29 @@ function adminLogin() {
 
     return (
         <div className="login-container">
-            <h1>ADMIN PORTAL</h1>
+            <h6 className='loginHeader'>ADMIN PORTAL</h6>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
+                <label className="userName">
+                    USERNAME:
                     <input
                         type="text"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
+                        placeholder="Enter Username"
                     />
                 </label>
-                <label>
-                    Password:
+                <label className="passWord">
+                    PASSWORD:
                     <input
                         type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
+                        placeholder="Enter password"
                     />
                 </label>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="SUBMIT" id="btnSubmit"/>
             </form>
-            <p>Don't have an account? <Link to="/register">Register</Link></p>
+            <p id="noAcc">Don't have an account? <Link to="/register">Register</Link></p>
         </div>
     );
 }

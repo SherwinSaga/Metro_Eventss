@@ -35,34 +35,34 @@ function Login() {
             console.error('Error:', error);
         });
     };
-    
-
 
 
     return (
         <div className="login-container">
+            <h6 className='loginHeader'>LOGIN</h6>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
+                <label className="userName">
+                    USERNAME:
                     <input
                         type="text"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
+                        placeholder="Enter Username"
                     />
                 </label>
-                <label>
-                    Password:
+                <label className="passWord">
+                    PASSWORD:
                     <input
                         type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
+                        placeholder="Enter password"
                     />
                 </label>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="SUBMIT" id="btnSubmit"/>
             </form>
-            <p>Don't have an account? <Link to="/register">Register</Link></p>
+            <p id="noAcc">Don't have an account? <Link to="/register">Register</Link></p>
         </div>
     );
 }
-
 export default Login;

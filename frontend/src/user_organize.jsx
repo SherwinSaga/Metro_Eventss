@@ -26,9 +26,11 @@ function organize(){
 
     
     return(
-        <div className="B_org">
+        <div id="B_org">
             <NavigationBar />
-            <button onClick={applyToBeOrganizer}>Become an Organizer!</button>
+            <div id="orgB">
+            <button onClick={applyToBeOrganizer} id="btnBorg">BECOME AN ORGANIZER!</button>
+            </div>
         </div>
     );
 }

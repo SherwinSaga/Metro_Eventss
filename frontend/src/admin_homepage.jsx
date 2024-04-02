@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Admin_navigation from "./admin_navigation";
+import './App.css'; 
 
 function AdminHomepage(){
     const [pendingRequests, setPendingRequests] = useState(0);
@@ -24,12 +25,14 @@ function AdminHomepage(){
     }, []);
 
     return(
-        <div>
+        <div id="adminPage">
             <Admin_navigation />
-            <h2>Statistics</h2>
-            <p>Pending Requests: {pendingRequests}</p>
-            <p>Number of Events: {numEvents}</p>
-            <p>Number of Organizers: {numOrganizers}</p>
+            <div className="adminhomeDisplay">
+                <h2>Statistics</h2>
+                <p>Pending Requests: {pendingRequests}</p>
+                <p>Number of Events: {numEvents}</p>
+                <p>Number of Organizers: {numOrganizers}</p>
+            </div>
         </div>
     );
 }

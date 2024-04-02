@@ -77,16 +77,16 @@ function Admin_requests(){
     
 
     return(
-        <div>
+        <div id="adminReq">
             <Admin_navigation />
-            <h2>Pending Requests</h2>
+            <h2 id="adminheaderReq">Pending Requests</h2>
             <div className="admin_request_display">
                 {requests.map(request => (
                     <div className="admin_table_display"key={request.oa_id}>
                         <h3>{request.oa_username}</h3>
                         <p>User ID: {request.oa_userID}</p>
-                        <button onClick={() => handleApprove(request.oa_userID)}>Approve</button>
-                        <button onClick={() => handleDeny(request.oa_userID)}>Deny</button>
+                        <button onClick={() => handleApprove(request.oa_userID)} id="btnApp">Approve</button>
+                        <button onClick={() => handleDeny(request.oa_userID)} id="btnDeny">Deny</button>
                     </div>
                 ))}
             </div>

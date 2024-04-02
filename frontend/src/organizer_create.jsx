@@ -65,18 +65,18 @@ function OrganizerCreate() {
     
 
     return (
-        <div>
+        <div id="createorgPage">
             <NavigationBar />
             <OrganizerNavBar />
             <div className="organizer_create">
-                <h1>CREATE</h1>
+            <h1 id="headerCreate">CREATE</h1>
                 <form onSubmit={handleSubmit}>
                     <input type="text" name="event_name" onChange={handleChange} placeholder="Event Name" required />
                     <input type="text" name="event_organizer" onChange={handleChange} placeholder="Event Organizer" required />
                     <input type="text" name="event_location" onChange={handleChange} placeholder="Event Location" required />
                     <input type="date" name="event_date" onChange={handleChange} placeholder="Event Date" required />
                     <input type="time" name="event_time" onChange={handleChange} placeholder="Event Time" required />
-                    <button type="submit">Submit</button>
+                    <button type="submit" id="btnMitsub">SUBMIT</button>
                 </form>
             </div>
         </div>
